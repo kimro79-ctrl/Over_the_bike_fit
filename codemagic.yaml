@@ -10,12 +10,16 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Create android dir if missing
-        script: mkdir -p "$CM_BUILD_DIR/android"
       - name: Set up local.properties
-        script: echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
-      - name: Verify local.properties (debug only)
-        script: cat "$CM_BUILD_DIR/android/local.properties" || echo "File not found - check permissions"
+        script: |
+          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Change to project root (critical fix)
+        script: |
+          cd "$CM_BUILD_DIR" || exit 1
+          # 만약 zip 업로드로 폴더 중첩됐다면 아래 줄 활성화 (주석 해제)
+          # cd Over-the-bike-fit || cd over_the_bike_fit || cd Over_-the_bike_fit || echo "No nested folder found"
+          pwd  # 로그로 현재 디렉토리 출력 (디버깅용)
+          ls -la  # pubspec.yaml 보이는지 확인
       - name: Install dependencies
         script: flutter pub get
       - name: Build release APK
