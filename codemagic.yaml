@@ -1,5 +1,5 @@
 workflows:
-  main-workflow:
+  flutter-android:
     name: Bike Fit Build
     instance_type: mac_mini_m2
     max_build_duration: 120
