@@ -21,4 +21,3 @@ workflows:
       - build/app/outputs/flutter-apk/app-release.apk
       - build/**/outputs/**/*.apk
       - build/**/outputs/**/mapping.txt
-      - flutter_driver.log
