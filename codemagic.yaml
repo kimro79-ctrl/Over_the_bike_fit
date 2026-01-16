@@ -10,23 +10,12 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Ensure android directory exists
-        script: |
-          mkdir -p "$CM_BUILD_DIR/android"
-          ls -la "$CM_BUILD_DIR/android"  # 로그로 디렉토리 확인
-      - name: Set up local.properties with verification
-        script: |
-          FLUTTER_SDK="$HOME/programs/flutter"
-          LOCAL_PROP="$CM_BUILD_DIR/android/local.properties"
-          echo "flutter.sdk=\( {FLUTTER_SDK}" > " \){LOCAL_PROP}"
-          echo "sdk.dir=\( {ANDROID_SDK_ROOT}" >> " \){LOCAL_PROP}"  # Android SDK 경로 보강 (필수 아님 but 안전)
-          if [ -f "${LOCAL_PROP}" ]; then
-            cat "${LOCAL_PROP}"  # 로그에 파일 내용 출력 → 성공 확인용
-            echo "local.properties created successfully"
-          else
-            echo "Failed to create local.properties"
-            exit 1
-          fi
+      - name: Create android dir if missing
+        script: mkdir -p "$CM_BUILD_DIR/android"
+      - name: Set up local.properties
+        script: echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Verify local.properties (debug only)
+        script: cat "$CM_BUILD_DIR/android/local.properties" || echo "File not found - check permissions"
       - name: Install dependencies
         script: flutter pub get
       - name: Build release APK
