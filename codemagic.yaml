@@ -10,31 +10,23 @@ workflows:
     scripts:
       - name: 압축 해제 및 안드로이드 설정 복구
         script: |
-          # 1. 압축 파일 해제
           unzip *.zip
-          
-          # 2. 프로젝트 폴더 찾기 및 이동
           PROJECT_DIR=$(find . -maxdepth 1 -type d -not -path '.*' | head -n 1)
           cd "$PROJECT_DIR"
           
-          # 3. Gradle 관련 오류 방지를 위해 안드로이드 설정 파일 재생성
-          # (기존 코드는 유지하며 빌드 환경만 업데이트합니다)
+          # 빌드 환경 자동 복구
           flutter create . --platforms android
-          
-          # 4. 의존성 설치
           flutter pub get
           
       - name: Build APK
         script: |
-          # 프로젝트 폴더로 다시 이동
           PROJECT_DIR=$(find . -maxdepth 1 -type d -not -path '.*' | head -n 1)
           cd "$PROJECT_DIR"
           
-          # 빌드 전 캐시 정리 및 실행
+          # 빌드 전 청소 및 릴리스 빌드
           flutter clean
           flutter pub get
           flutter build apk --release
 
     artifacts:
-      # 빌드된 APK 파일을 찾아서 Codemagic 결과창에 표시합니다.
       - "**/build/app/outputs/flutter-apk/app-release.apk"
