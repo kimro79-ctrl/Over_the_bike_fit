@@ -1,5 +1,5 @@
 workflows:
-  android-workflow:
+  main-workflow:
     name: Bike Fit Build
     instance_type: mac_mini_m2
     max_build_duration: 120
@@ -9,8 +9,8 @@ workflows:
       - name: Build APK
         script: |
           unzip *.zip
-          PROJ=$(find . -maxdepth 2 -name "pubspec.yaml" -exec dirname {} \;)
-          cd "$PROJ"
+          PROJ_PATH=$(find . -name "pubspec.yaml" -exec dirname {} \; | head -n 1)
+          cd "$PROJ_PATH"
           flutter create . --platforms android
           flutter pub get
           flutter build apk --release
