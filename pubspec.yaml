@@ -1,24 +1,14 @@
 name: over_the_bike_fit
-description: Cycling app with neon design and real-time charts.
-publish_to: 'none'
+description: Cycling app with neon design and charts.
 version: 1.0.0+1
-
 environment:
   sdk: '>=3.0.0 <4.0.0'
-
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
   fl_chart: ^0.66.0
   health: ^13.2.1
   permission_handler: ^11.0.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^2.0.0
-
 flutter:
   uses-material-design: true
   assets:
