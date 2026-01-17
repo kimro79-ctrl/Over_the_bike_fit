@@ -38,6 +38,7 @@ class _CyclingHomeScreenState extends State<CyclingHomeScreen> {
   @override
   void initState() {
     super.initState();
+    // 초기 그래프 데이터 생성
     for (int i = 0; i < 10; i++) {
       hrPoints.add(FlSpot(i.toDouble(), 90 + Random().nextDouble() * 10));
     }
@@ -97,7 +98,7 @@ class _CyclingHomeScreenState extends State<CyclingHomeScreen> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
-      height: 220,
+      height: 250,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.8),
         borderRadius: BorderRadius.circular(20),
