@@ -1,6 +1,7 @@
 workflows:
   android-workflow:
     name: Android Release Build
+    # 마침표(.)는 깃허브 저장소의 가장 첫 화면(루트)을 의미합니다.
     working_directory: . 
     environment:
       flutter: stable
@@ -8,12 +9,9 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: |
-          # 만약 하위 폴더에 있다면 아래 줄의 주석(#)을 지우고 폴더명을 적으세요
-          # cd Over_the_bike_fit 
           flutter pub get
       - name: Build APK
         script: |
-          # cd Over_the_bike_fit
           flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
