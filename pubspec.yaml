@@ -18,8 +18,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
   assets:
     - assets/background.png
     - assets/icon/heart.png
     - assets/icon/bike_ui_dark.png
-    - assets/splash/splash_screen.png
