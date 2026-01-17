@@ -1,7 +1,6 @@
 workflows:
   android-workflow:
     name: Android Release Build
-    # 저장소 루트에 pubspec.yaml이 있다면 아래처럼 마침표(.) 하나만 찍으세요.
     working_directory: . 
     environment:
       flutter: stable
@@ -9,9 +8,12 @@ workflows:
     scripts:
       - name: Get Flutter packages
         script: |
+          # 만약 하위 폴더에 있다면 아래 줄의 주석(#)을 지우고 폴더명을 적으세요
+          # cd Over_the_bike_fit 
           flutter pub get
       - name: Build APK
         script: |
+          # cd Over_the_bike_fit
           flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
